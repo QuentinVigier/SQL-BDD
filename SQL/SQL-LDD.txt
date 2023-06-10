@@ -1,0 +1,33 @@
+// Créer une base de données
+CREATE DATABASE IF NOT EXISTS college;
+// Utiliser la base de données college
+USE college;
+// Créer une table sans CIF
+CREATE TABLE IF NOT EXISTS matiere(
+	id_matiere INT,
+    nom_matiere VARCHAR(99),
+    PRIMARY KEY(id_matiere)
+);
+// Créer une table avec CIF
+CREATE TABLE IF NOT EXISTS professeur(
+    matricule VARCHAR(99),
+    prenom VARCHAR(99),
+    nom VARCHAR(99),
+    id_matiere INT,
+    PRIMARY KEY(matricule),
+    FOREIGN KEY(id_matiere) REFERENCES matiere(id_matiere)
+);
+// Supprimer une table
+DROP TABLE professeur;
+// Ajouter une colonne
+ALTER TABLE matiere
+ADD libelle VARCHAR(50);
+// Supprimer une colonne
+ALTER TABLE matiere
+DROP COLUMN libelle;
+// Modifier une colonne
+ALTER TABLE matiere
+MODIFY nom_matiere INT;
+// Renommer une colonne
+ALTER TABLE matiere
+CHANGE nom_matiere libelle_matiere VARCHAR(99);

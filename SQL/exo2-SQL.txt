@@ -1,0 +1,38 @@
+use college;
+create TABLE if not exists RDN(
+	ref_rdn INT,
+    valeur INT,
+    appreciation VARCHAR(2500),
+    PRIMARY KEY (ref_rdn)
+);
+
+create TABLE if not exists classe(
+	num_classe INT,
+    capacite INT,
+    PRIMARY KEY (num_classe)
+);
+
+create TABLE if not exists eleve(
+	num_eleve INT,
+    nom VARCHAR(50),
+    prenom VARCHAR(50),
+    num_classe INT,
+    PRIMARY KEY (num_eleve),
+    FOREIGN KEY (num_classe) REFERENCES classe(num_classe)
+);
+
+create TABLE if not exists Enseigner(
+	num_classe INT,
+    id_matiere INT,
+    PRIMARY KEY(num_classe, id_matiere),
+    FOREIGN KEY (num_classe) REFERENCES classe(num_classe),
+    FOREIGN KEY (id_matiere) REFERENCES matiere(id_matiere)
+);
+
+create TABLE if not exists avoir(
+	id_matiere INT,
+    ref_rdn INT,
+    PRIMARY KEY (id_matiere, ref_rdn),
+    FOREIGN KEY (id_matiere) REFERENCES matiere(id_matiere),
+    FOREIGN KEY (ref_rdn) REFERENCES RDN(ref_rdn)
+);

@@ -1,0 +1,128 @@
+Partie 1
+
+1) b-SELECT
+2) a-*
+3) d-AND
+4) b-BETWEEN
+5) d-NOT
+6) c-JOIN
+7) a-EXCEPT
+8) c-JOIN 
+9) b-INSERT
+10) d-UPDATE
+11) a-DELETE
+12) b-DROP
+13) d
+14) d-requête
+15) b-TRUNCATE TABLE
+16) SELECT First_Name, Last_Name, ID_Number
+FROM Users;
+17) SELECT Users*
+FROM Users
+WHERE etat LIKE "CA";
+18) SELECT First_Name, Last_Name
+FROM Users
+WHERE gender like "F"
+AND state like "CA";
+19) SELECT First_Name, Last_Name
+FROM Users 
+WHERE departement NOT LIKE "IT";
+20) DROP TABLE Equipment
+
+Partie 2
+
+1) a-normalisation
+2) a-1FN
+3) b-2FN
+4) c
+5) d
+6) a
+7) d
+8) a
+9) b
+10) c
+11) a-1FN
+12) c-3FN
+13) a-1FN
+14) c-arbre B
+15) d
+16) De zérop à plusieurs
+17) clé primaire
+18) clé primaire composite
+19) Un et un seul
+20) Index cluster ou non-cluster
+
+Partie 3
+
+1) a et c
+2) c
+3) c
+4) c
+5) a
+6) c
+7) d
+8) c
+9) c
+10) c
+11) c
+12) b
+13) b
+14) a
+15) c
+
+16)Une restauration fragmentaire
+17) dbcreator
+18)/usr/sbin/useradd
+19) Authentification Windows ou Authentification SQL Server
+20) DROP Login
+
+Partie 5
+
+1)SELECT produit.DesiProd
+FROM produit
+ORDER BY produit.DesiProd;
+
+2)SELECT produit.DesiProd
+FROM produit
+WHERE produit.RefProd < 15;
+
+3)SELECT produit.DesiProd
+FROM produit, livraison, composer
+WHERE produit.RefProd < 15
+AND livraison.NoBl >= 5
+AND composer.RefProd = produit.RefProd
+AND composer.NoBl = livraison.NoBl;
+
+4)SELECT produit.DesiProd
+FROM produit, livraison, composer
+WHERE produit.RefProd < 15 OR produit.RefProd BETWEEN '30' AND '40'
+AND livraison.NoBl >= 5
+AND composer.RefProd = produit.RefProd
+AND composer.NoBl = livraison.NoBl;
+
+5)SELECT produit.DesiProd
+FROM produit
+WHERE produit.RefProd < 15 
+OR produit.RefProd BETWEEN '30' AND '40'
+OR produit.RefProd >= 70;
+
+6)SELECT produit.DesiProd
+FROM produit
+WHERE produit.DesiProd LIKE 'e%';
+
+7)SELECT produit.DesiProd
+FROM produit
+WHERE produit.DesiProd LIKE '%e';
+
+8)SELECT produit.DesiProd
+FROM produit
+WHERE produit.DesiProd LIKE '%e%';
+
+9)SELECT produit.DesiProd
+FROM produit
+WHERE produit.DesiProd LIKE '_e%';
+
+10)SELECT client.NomCli
+FROM client
+WHERE client.NomCli LIKE 'a%'
+AND client.NomCli NOT LIKE '_n%';

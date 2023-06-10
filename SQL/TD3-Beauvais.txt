@@ -1,0 +1,22 @@
+Exercice 2 
+
+1) SELECT DISTINCT NumAut
+FROM ecrit
+WHERE NumAut NOT IN (SELECT NumAuteur
+                     FROM livre, ecrit
+                     WHERE AnneeImpression = 2003
+                     AND ecrit.NumL = livre.NumLivre);
+
+2) SELECT numLivre, titre
+from livre
+WHERE numLivre IN (SELECT NumL
+                   FROM editeur, edite
+                   WHERE nom LIKE "Gallimard"
+                   AND editeur.NumE = edite.NumE)
+            
+AND numLivre IN (SELECT NumL
+                 FROM auteur, ecrit
+                 WHERE nom NOT LIKE "Himes"
+                 AND prenom NOT LIKE "Chester"
+                 AND auteur.NumAut = ecrit.NumAut);
+                   

@@ -1,0 +1,98 @@
+1)SELECT nom, prenom
+FROM personne
+ORDER BY nom, naissance;
+
+SELECT nom, prenom
+FROM personne
+ORDER BY naissance;
+
+2)SELECT titre, idGenre
+FROM film
+ORDER BY titre ASC;
+
+3)SELECT titre
+FROM film, genre
+WHERE film.idGenre = genre.id
+AND genre.type LIKE "thriller";
+
+4)SELECT genre.type
+FROM realisateur, genre, film
+WHERE realisateur.nomR LIKE "Martin"
+AND realisateur.prenomR LIKE "Scorcesse"
+AND film.idGenre = genre.id
+AND film.idRealisateur = realisateur.idRealisateur;
+
+5)SELECT DISTINCT personne.nom, personne.prenom
+FROM personne, joue, film
+WHERE film.titre LIKE "Le convoyeur"
+AND joue.idFilm = film.id
+AND joue.idActeur = personne.id
+ORDER BY personne.nom DESC;
+
+6)SELECT DISTINCT personne.nom, personne.prenom
+FROM personne, film, genre, joue
+WHERE genre.type LIKE "comédie"
+AND joue.idActeur = personne.id
+AND joue.idFilm = film.id
+AND film.idGenre = genre.id;
+
+7)SELECT DISTINCT genre.type
+FROM genre, film, joue, personne
+WHERE personne.nom LIKE "Di Caprio"
+AND personne.prenom LIKE "Leonardo"
+AND film.idGenre = genre.id
+AND joue.idActeur = personne.id
+AND joue.idFilm = film.id;
+
+8)SELECT *
+FROM personne
+ORDER BY naissance ASC;
+
+9)SELECT film.*
+FROM film, joue, personne 
+WHERE personne.nom LIKE "Pecas" 
+AND personne.prenom LIKE "Max" 
+AND film.nbSpectateurs > 1000000 
+AND joue.idActeur = personne.id 
+AND joue.idFilm = film.id;
+
+10)SELECT film.*
+FROM film
+WHERE film.nbSpectateurs < 100000;
+
+11)SELECT film.titre 
+FROM realisateur, film, joue, personne
+WHERE realisateur.nomR LIKE "Canet"
+AND realisateur.prenomR LIKE "Guillaume"
+AND personne.nom LIKE "Cotillard"
+AND personne.prenom LIKE "Marion"
+AND film.idRealisateur = realisateur.idRealisateur
+AND joue.idActeur = personne.id
+AND joue.idFilm = film.id;
+
+12)SELECT film.titre
+FROM realisateur, film, joue, personne
+WHERE realisateur.nomR = personne.nom
+AND realisateur.prenomR = personne.prenom
+AND film.idRealisateur = realisateur.idRealisateur
+AND joue.idFilm = film.id
+AND joue.idActeur = personne.id;
+
+13)SELECT film.annee
+FROM film, joue, personne
+WHERE personne.nom LIKE "Dujardin"
+AND personne.prenom LIKE "Jean"
+AND joue.idActeur = personne.id
+AND joue.idFilm = film.id;
+
+14)SELECT joue.salaire
+FROM joue, personne
+WHERE personne.nom LIKE "Dujardin"
+AND personne.prenom LIKE "Jean"
+AND joue.idActeur = personne.id
+ORDER BY salaire DESC;
+
+15)SELECT p1.*, p2.*
+FROM personne p1, personne p2
+WHERE p1.nom LIKE p2.nom
+AND p1.id > p2.id;

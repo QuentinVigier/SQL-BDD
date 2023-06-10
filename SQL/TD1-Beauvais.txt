@@ -1,0 +1,94 @@
+create database if not exists librairie;
+use librairie;
+
+create table if not exists livre(
+	NumLivre INT,
+    Titre VARCHAR(200),
+    NombrePages INT,
+    AnneeImpression YEAR,
+    primary key(NumLivre)
+);
+
+create table if not exists auteur(
+	NumAut INT,
+    Nom VARCHAR(100),
+    Prenom VARCHAR(100),
+    primary key(NumAut)
+);
+
+create table if not exists ecrit(
+	NumL INT,
+    NumAut INT,
+    primary key(NumL, NumAut),
+    foreign key(NumL) references livre(NumLivre),
+    foreign key(NumAut) references auteur(NumAut)
+);
+
+create table if not exists editeur(
+	NumE INT, 
+    Nom VARCHAR(200),
+    Ville VARCHAR(350),
+    primary key(NumE)
+);
+
+create table if not exists edite(
+	NumL INT,
+    NumE INT, 
+    primary key(NumL, NumE),
+    foreign key(NumL) references livre(NumLivre),
+    foreign key(NumE) references editeur(NumE)
+);
+
+insert into livre values("0","La reines des pommes","282","2003");
+insert into livre values("1","Mangeclous","498","2004");
+insert into livre values("2","Belle du Seigneur","1110","2002");
+insert into livre values("3","Couché dans le pain","248","2002");
+insert into livre values("4","La Matrimoine","286","1976");
+
+insert into auteur values("0", "Himes", "Chester");
+insert into auteur values("1", "Bazin", "Hervé");
+insert into auteur values("2", "Cohen", "Albert");
+
+insert into ecrit values("0", "0");
+insert into ecrit values("1", "2");
+insert into ecrit values("2", "2");
+insert into ecrit values("3", "0");
+insert into ecrit values("4", "1");
+
+insert into editeur values("0", "Gallimard", "Paris");
+insert into editeur values("1", "Seuil", "Lille");
+
+insert into edite values("0", "0");
+insert into edite values("1", "0");
+insert into edite values("2", "0");
+insert into edite values("3", "0");
+insert into edite values("4", "1");
+
+Exercice 1
+
+1) select Nom FROM Auteur;
+2) Select Nom from auteur where Prenom = "Albert";
+3) Select titre from livre order by titre;
+4) SELECT NumLivre from livre where Titre LIKE "%d%";
+5) select Titre FROM livre WHERE AnneeImpression = "1976" OR AnneeImpression = "2003";
+6) SELECT NumLivre FROM livre WHERE AnneeImpression BETWEEN "2003" AND "2004";
+SELECT NumLivre FROM livre WHERE AnneeImpression <= "2004" AND AnneeImpression >= "2003";
+7) SELECT Titre FROM livre WHERE AnneeImpression = "2003" AND NombrePages > "500";
+8) SELECT Titre FROM livre WHERE AnneeImpression = "2003" AND NombrePages > "500" AND Titre != "%L";
+
+Exercice 2
+
+1) SELECT COUNT(NumE) FROM editeur;
+2) SELECT MIN(NombrePages) FROM livre;
+SELECT MAX(NombrePages) FROM livre;
+3) SELECT COUNT(NumAut) FROM ecrit WHERE NumAut = "2";
+4) SELECT AVG(NombrePages) FROM livre;
+5)SELECT COUNT(DISTINCT AnneeImpression) FROM livre;
+
+Exercice 3
+1) SELECT NumL FROM edite WHERE NumE = 0;
+2) SELECT NumAut FROM ecrit WHERE NumL = "1";
+3) SELECT NumL FROM ecrit WHERE NumAut = 2;
+4) SELECT titre FROM livre, ecrit WHERE Livre.NumLivre = Ecrit.NumL AND NumAut = 2;
+5) SELECT ecrit.NumL FROM ecrit, edite WHERE ecrit.NumL = edite.NumL AND NumAut != 2 AND NumE = 0;
+6) SELECT Ville FROM editeur, edite, livre WHERE edite.NumL = livre.NumLivre AND editeur.NumE = edite.NumE AND livre.NombrePages > 500;

@@ -1,0 +1,76 @@
+1)SELECT e.nom_et, e.prenom_et
+FROM etudiant e
+ORDER BY e.nom_et ASC
+
+2)SELECT COUNT(c.num_classe)
+FROM classe c 
+
+3)SELECT e.*
+FROM etudiant e, classe c
+WHERE e.num_classe = c.num_classe
+AND (c.nom_classe LIKE "BTS SIO A" 
+OR c.nom_classe LIKE "BTS SIO B")
+
+4)SELECT nom_classe, count(e.num_et)
+FROM CLASSE c
+INNER JOIN ETUDIANT e
+ON e.num_classe = c.num_classe
+GROUP BY c.num_classe HAVING count(e.num_et)>24
+
+5)SELECT e.nom_et, e.prenom_et, e.date_naissance_et
+FROM etudiant e
+WHERE e.date_naissance_et BETWEEN '1987/12/24' AND '1990/12/24';
+
+6)SELECT m.nom_mat, o.note
+FROM etudiant e, matiere m, obtenir o
+WHERE e.num_et = o.num_et
+AND o.num_mat = m.num_mat
+AND e.nom_et = "TRADER"
+AND e.prenom_et= "Basile";
+
+7)SELECT nom_mat,AVG(note) as moyenne
+FROM  MATIERE
+NATURAL JOIN OBTENIR NATURAL JOIN ETUDIANT e INNER JOIN CLASSE c
+ON e.num_classe = c.num_classe
+WHERE nom_classe = "BTS SIO B"
+GROUP BY num_mat HAVING moyenne < 10
+
+8)SELECT nom_et,AVG(note)
+FROM OBTENIR 
+NATURAL JOIN ETUDIANT e INNER JOIN CLASSE c
+ON e.num_classe = c.num_classe
+WHERE nom_classe = "BTS SIO B"GROUP BY e.num_et
+
+9)
+12)SELECT c.nom_classe, COUNT(e.num_et) AS nbe
+FROM classe c, etudiant e
+WHERE e.num_classe = c.num_classe
+GROUP BY c.nom_classe
+UNION
+(SELECT c.nom_classe, 0 AS nbe
+ FROM classe c 
+ WHERE c.num_classe NOT IN (SELECT DISTINCT e.num_classe
+                           FROM etudiant e
+                           WHERE e.num_classe IS NOT NULL)
+);
+
+13) DELETE FROM obtenir
+WHERE obtenir.num_et IN
+    (SELECT e.num_et
+     FROM etudiant e
+     WHERE e.num_classe IN
+         (SELECT c.num_classe
+         FROM classe c
+         WHERE c.nom_classe IN ("BTS IG A","BTS IG B")));
+DELETE FROM etudiant
+     WHERE etudiant.num_classe IN
+         (SELECT c.num_classe
+         FROM classe c
+         WHERE c.nom_classe IN ("BTS IG A","BTS IG B"));
+DELETE FROM comprendre
+     WHERE comprendre.num_classe IN
+         (SELECT c.num_classe
+         FROM classe c
+         WHERE c.nom_classe IN ("BTS IG A","BTS IG B"));
+DELETE FROM classe
+         WHERE classe.nom_classe IN ("BTS IG A","BTS IG B"));
