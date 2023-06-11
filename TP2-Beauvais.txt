@@ -1,0 +1,32 @@
+Exercice 1
+
+1) SELECT anneeimpression, COUNT(*) as Nblivres FROM livre GROUP BY anneeimpression;
+2) SELECT anneeimpression, MIN(NombrePages), MAX(NombrePages) FROM livre GROUP BY anneeimpression;
+3) SELECT anneeimpression, AVG(NombrePages) FROM livre GROUP BY anneeimpression HAVING AnneeImpression > 2000;
+4) SELECT numAut, COUNT(NumL) FROM ecrit GROUP BY NumAut;
+5) SELECT ville, count(*) AS NbAuteur FROM editeur GROUP BY ville;
+6) SELECT NumE, COUNT(NumL) FROM edite GROUP BY NumE;
+
+Exercice 2 
+
+1) SELECT anneeimpression, numAut, COUNT(*) AS NbLivres FROM livre, ecrit WHERE livre.NumLivre = ecrit.NumL AND NumAut = 2 GROUP BY anneeimpression;
+2) SELECT anneeimpression, numAut, COUNT(*) AS NbLivres FROM livre, ecrit WHERE livre.NumLivre = ecrit.NumL AND NumAut = 2 GROUP BY anneeimpression;
+3) SELECT anneeimpression, nom, COUNT(*) AS NbLivres FROM livre, ecrit, auteur WHERE livre.NumLivre = ecrit.NumL AND auteur.NumAut = ecrit.NumAut AND nom = "Himes" GROUP BY anneeimpression;
+4) SELECT ville, nom, COUNT(*) AS NbLivres FROM livre, edite, editeur WHERE livre.NumLivre = edite.NumL AND editeur.NumE = edite.NumE GROUP BY ville;
+
+Exercice 3
+
+1) SELECT numLivre FROM livre WHERE nombrepages > 300 AND anneeimpression < 2003;
+SELECT numLivre FROM livre l1 WHERE nombrepages > 300 
+AND EXISTS
+(SELECT numLivre FROM livre l2 WHERE anneeimpression < 2003 AND l1.nomLivre = l2.numLivre);
+
+2) SELECT numLivre FROM livre WHERE nombrepages > 300 OR anneeimpression < 2003;
+SELECT numLivre FROM livre l1 WHERE nombrepages > 300 
+AND EXISTS
+(SELECT numLivre FROM livre l2 WHERE anneeimpression < 2003 AND l1.nomLivre = l2.numLivre);
+
+3) SELECT numLivre FROM livre WHERE nombrepages > 300 AND anneeimpression > 2003;
+SELECT numLivre FROM livre l1 WHERE nombrepages > 300 
+UNION
+(SELECT numLivre FROM livre l2 WHERE anneeimpression < 2003);

@@ -1,0 +1,71 @@
+Partie 1
+
+1) b-SELECT
+2) a-*
+3) d-AND
+4) b-BETWEEN
+5) 
+6) a-AND
+7) a-EXCEPT
+8) c-JOIN
+9) b-INSERT
+10) d-UPDATE
+11) a-DELETE
+12) b-DROP
+13)
+14) a-rappel
+15) b-TRUNCATE TABLE
+16) SELECT First_Name, Last_Name, ID_Number
+FROM Users;
+17) SELECT Users*
+FROM Users
+WHERE etat LIKE "CA";
+18) SELECT First_Name, Last_Name
+FROM Users
+WHERE gender like "F"
+AND state like "CA";
+19) SELECT First_Name, Last_Name
+FROM Users 
+WHERE NOT departement LIKE "IT";
+20) DROP TABLE Equipment
+
+Partie 2
+
+1) b-déduplication
+2) a-1FN
+3) d-4FN
+4) c
+5) d
+6) a
+7) d
+8) a
+9) b
+10) c
+11) a-1FN
+12) c-3FN
+13) a-1FN
+14) c-arbre B
+15) d
+16) De zérop à plusieurs
+17) clé primaire
+18) clé de contrainte unique
+19) Un et un seul
+20) Index cluster ou non-cluster
+
+Partie 3
+
+1) d et b
+2) c
+3) c
+4) c
+5) a
+6) c
+7) b
+8) c
+9) c
+10) c
+11) c
+12) d
+13) b
+14) a
+15) c

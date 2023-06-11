@@ -1,0 +1,91 @@
+Exercice 1
+
+1) SELECT COUNT(film.id)
+FROM film;
+
+2)SELECT MIN(annee), MAX(annee)
+FROM film;
+
+3)SELECT film.annee
+FROM film, realisateur
+WHERE film.idRealisateur = realisateur.idRealisateur
+AND realisateur.paysR like "FR"
+LIMIT 1;
+
+4)SELECT COUNT(film.id)
+FROM film, joue, personne
+WHERE joue.idActeur = personne.id
+AND joue.idFilm = film.id
+AND personne.nom LIKE "Pecas"
+AND personne.prenom LIKE "Max"
+AND film.annee > 1980;
+
+5)SELECT COUNT(genre.type)
+FROM genre;
+
+6)SELECT MIN(joue.salaire), MAX(joue.salaire), AVG(joue.salaire)
+FROM joue;
+
+7)SELECT COUNT(film.id)
+FROM film, realisateur
+WHERE film.idRealisateur = realisateur.idRealisateur
+AND realisateur.paysR LIKE "USA";
+
+8)SELECT MIN(film.nbSpectateurs), MAX(film.nbSpectateurs), AVG(film.nbSpectateurs)
+FROM film, genre
+WHERE film.idGenre = genre.id
+AND genre.type LIKE "comédie";
+
+9)SELECT SUM(film.nbSpectateurs) AS TotalSpectateurs, SUM(film.nbSpectateurs) * 8 AS Recette
+FROM film;
+
+10)SELECT MIN(film.nbSpectateurs), MAX(film.nbSpectateurs), AVG(film.nbSpectateurs)
+FROM film, realisateur
+WHERE film.idRealisateur = realisateur.idRealisateur
+AND realisateur.nomR LIKE "Martin"
+AND realisateur.prenomR LIKE "Scorcesse";
+
+Exercice 2
+
+1)SELECT COUNT(personne.id) AS NbActeurs, personne.pays
+FROM personne
+GROUP BY personne.pays;
+
+2)SELECT COUNT(film.id) AS NbFilms, genre.type
+FROM film, genre
+WHERE film.idGenre = genre.id
+GROUP BY genre.type;
+
+3)SELECT MIN(film.nbSpectateurs), MAX(film.nbSpectateurs), realisateur.nomR, realisateur.prenomR
+FROM film, realisateur
+WHERE film.idRealisateur = realisateur.idRealisateur
+GROUP BY realisateur.nomR, realisateur.prenomR;
+
+4)SELECT AVG(joue.salaire) AS MoySalaire, personne.nom, personne.prenom
+FROM joue, personne
+WHERE joue.idActeur = personne.id
+GROUP BY personne.nom, personne.prenom
+HAVING MoySalaire > 400000;
+
+5)SELECT COUNT(film.id), personne.nom, personne.prenom
+FROM personne, film, joue
+WHERE joue.idActeur = personne.id
+AND joue.idFilm = film.id
+GROUP BY personne.nom, personne.prenom;
+
+6)SELECT COUNT(film.id), realisateur.nomR, realisateur.prenomR
+FROM film, realisateur
+WHERE film.idRealisateur = realisateur.idRealisateur
+AND realisateur.paysR LIKE "UK"
+GROUP BY realisateur.nomR, realisateur.prenomR;
+
+7)SELECT personne.*, COUNT(film.id) AS nb
+FROM film, personne, joue, genre
+WHERE genre.type LIKE "comédie"
+AND joue.idActeur = personne.id
+AND joue.idFilm = film.id
+AND film.idGenre = genre.id
+GROUP BY personne.id
+HAVING nb >= 2;
+
+8)
